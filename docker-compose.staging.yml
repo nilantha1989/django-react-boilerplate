@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  server:
+    hostname: server
+    image: registryd.avantrio.xyz/project/server
+    environment:
+      DEBUG: 0
+      DATABASE_USER: admin_staging
+      DATABASE_PWD: admin@staging#34
+      DATABASE_NAME: hq
+      DATABASE_HOST: 172.17.0.1
+      DATABASE_PORT: 5432
+      APP_HOST: 'project.staging.avantrio.xyz'
+    expose:
+      - '8000'
+    ports:
+      - 8006:8000
+    command: python manage.py runserver 0.0.0.0:8000
+    # command: gunicorn project.wsgi:application --bind 0.0.0.0:8000
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.23.0.0/16
