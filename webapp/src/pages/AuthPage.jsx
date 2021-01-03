@@ -45,13 +45,16 @@ export default function SignInPage() {
                 if (rememberMe) {
                     localStorage.setItem(REFRESH_TOKEN_NAME, response.refresh);
                 } else {
-                    sessionStorage.setItem(REFRESH_TOKEN_NAME, response.refresh);
+                    sessionStorage.setItem(
+                        REFRESH_TOKEN_NAME,
+                        response.refresh
+                    );
                 }
                 history.push("/");
                 dispatch(getUser());
             }
         } catch (e) {
-            console.error(e);
+            // continue regardless of error
         }
     };
 
@@ -92,8 +95,11 @@ export default function SignInPage() {
                             if (!status) return <></>;
                             return (
                                 <div
-                                    className={`alert alert-${status.type === "error" ? "danger" : "success"
-                                        }`}
+                                    className={`alert alert-${
+                                        status.type === "error"
+                                            ? "danger"
+                                            : "success"
+                                    }`}
                                     role="alert"
                                 >
                                     <p>{status.message}</p>
@@ -117,13 +123,13 @@ export function LogoutPage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(authActions.removeUser())
-        sessionStorage.removeItem(ACCESS_TOKEN_NAME)
-        sessionStorage.removeItem(REFRESH_TOKEN_NAME)
-        localStorage.removeItem(REFRESH_TOKEN_NAME)
+        dispatch(authActions.removeUser());
+        sessionStorage.removeItem(ACCESS_TOKEN_NAME);
+        sessionStorage.removeItem(REFRESH_TOKEN_NAME);
+        localStorage.removeItem(REFRESH_TOKEN_NAME);
         history.push("/signin");
-    }, [dispatch, history])
-    
+    }, [dispatch, history]);
+
     return <></>;
 }
 
@@ -132,6 +138,7 @@ export function ForgotPasswordPage() {
         email: "",
     });
     /* eslint-disable */
+    // left as a sample
     const onSubmit = (values, { setSubmitting, resetForm, setStatus }) => {
         // setSubmitting(true);
     };
@@ -141,21 +148,32 @@ export function ForgotPasswordPage() {
         <div className="form">
             <div className="heading">Forgot Your Password?</div>
             <div className="sub-text">
-                Enter email associated with this account and we'll send a password reset
-                link.
-      </div>
+                Enter email associated with this account and we'll send a
+                password reset link.
+            </div>
             <div className="form-wrapper mb-3">
-                <Form enableReinitialize initialValues={formData} onSubmit={onSubmit}>
+                <Form
+                    enableReinitialize
+                    initialValues={formData}
+                    onSubmit={onSubmit}
+                >
                     <div className="input-row">
-                        <TextField label="Email" name="email" placeholder="Email" />
+                        <TextField
+                            label="Email"
+                            name="email"
+                            placeholder="Email"
+                        />
                     </div>
                     <DisplayField fieldName="status">
                         {(status) => {
                             if (!status) return <></>;
                             return (
                                 <div
-                                    className={`alert alert-${status.type === "error" ? "danger" : "success"
-                                        }`}
+                                    className={`alert alert-${
+                                        status.type === "error"
+                                            ? "danger"
+                                            : "success"
+                                    }`}
                                     role="alert"
                                 >
                                     <p>{status.message}</p>
@@ -201,7 +219,11 @@ export function RegisterPage() {
                         />
                     </div>
                     <div className="input-row">
-                        <TextField label="Email" name="email" placeholder="Email" />
+                        <TextField
+                            label="Email"
+                            name="email"
+                            placeholder="Email"
+                        />
                     </div>
                     <div className="input-row">
                         <TextField
@@ -224,8 +246,11 @@ export function RegisterPage() {
                             if (!status) return <></>;
                             return (
                                 <div
-                                    className={`alert alert-${status.type === "error" ? "danger" : "success"
-                                        }`}
+                                    className={`alert alert-${
+                                        status.type === "error"
+                                            ? "danger"
+                                            : "success"
+                                    }`}
                                     role="alert"
                                 >
                                     <p>{status.message}</p>
@@ -233,7 +258,10 @@ export function RegisterPage() {
                             );
                         }}
                     </DisplayField>
-                    <SubmitButton className="btn btn-primary mt-4" title="Register" />
+                    <SubmitButton
+                        className="btn btn-primary mt-4"
+                        title="Register"
+                    />
                 </Form>
             </div>
         </div>
@@ -241,16 +269,16 @@ export function RegisterPage() {
 }
 
 export function ForgotLinkSent() {
-
     return (
         <div className="form">
             <div className="heading">Check your email!</div>
             <div className="sub-text">
-                Follow the instructions in the email we just sent you to reset password.
-      </div>
+                Follow the instructions in the email we just sent you to reset
+                password.
+            </div>
             <Link className="mt-4 w-100" to="/login">
                 Back to Log in
-      </Link>
+            </Link>
         </div>
     );
 }
@@ -269,7 +297,7 @@ export function ResetPasswordPage() {
             <div className="heading">Reset Your Password</div>
             <div>
                 Your new password must have 8 characters and at leat one symbol.
-      </div>
+            </div>
             <div className="wrapper">
                 <Form
                     enableReinitialize
@@ -278,7 +306,11 @@ export function ResetPasswordPage() {
                     onSubmit={onSubmit}
                 >
                     <div className="input-row">
-                        <TextField label="Password" name="password" type="password" />
+                        <TextField
+                            label="Password"
+                            name="password"
+                            type="password"
+                        />
                     </div>
                     <div className="input-row">
                         <TextField
@@ -292,8 +324,11 @@ export function ResetPasswordPage() {
                             if (!status) return <></>;
                             return (
                                 <div
-                                    className={`alert alert-${status.type === "error" ? "danger" : "success"
-                                        }`}
+                                    className={`alert alert-${
+                                        status.type === "error"
+                                            ? "danger"
+                                            : "success"
+                                    }`}
                                     role="alert"
                                 >
                                     <p>{status.message}</p>

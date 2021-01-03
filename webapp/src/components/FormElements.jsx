@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
+// these are wrapper components. need to forward the props via spreading 
 
 import React, { useState } from "react";
 import {
