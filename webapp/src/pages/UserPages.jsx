@@ -4,6 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import PaginatedTable from "../components/PaginatedTable";
 import { userActions } from "../state/user";
+import { modalActions } from "../state/modal";
 import {
     Form,
     TextField,

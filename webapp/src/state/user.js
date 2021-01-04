@@ -49,7 +49,7 @@ const userSlice = createSlice({
     extraReducers: {
         [loadAllUsers.fulfilled]: (state, action) => {
             state.allUsers.allIds = [];
-            payload.forEach((usr) => {
+            action.payload.forEach((usr) => {
                 state.allUsers.allIds.push(usr.id);
                 state.allUsers.byId[usr.id] = usr;
             });

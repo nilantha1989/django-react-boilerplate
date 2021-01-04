@@ -17,6 +17,7 @@ import {PublicRoute, PrivateRoute} from './CustomRoutes';
 import SignInPage, {RegisterPage, LogoutPage} from './pages/AuthPage';
 import ReduxToastr from 'react-redux-toastr';
 import {loadAllUsers} from './state/user';
+import ModalContainer from './components/ModalContainer'
 
 
 
@@ -88,7 +89,10 @@ function App() {
 						<PrivateRoute component={LogoutPage} path="/signout" exact />
 						<PrivateRoute component={RegisterPage} path="/register" exact />
 						<PrivateRoute component={Layout} path="/" />
+
 					</Switch>
+					<ModalContainer/>
+
 				</div>
 			</Router>
 		</Provider>
