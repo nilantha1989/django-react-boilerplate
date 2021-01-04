@@ -1,6 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from "../api";
-import { showToastError } from "../utils/toastHelper";
+
+export const getUser = createAsyncThunk("auth/getUser", async () => {
+    const response = await api.getMyProfile();
+    return response.data;
+});
 
 const initState = {
     profile: {},
@@ -26,22 +30,14 @@ const authSlice = createSlice({
             state.isLoading = payload;
         },
     },
+    extraReducers: {
+        [getUser.fulfilled]: (state, action) => {
+            state.profile = action.payload;
+            state.isSignedIn = true;
+        },
+    },
 });
 /* eslint-disable no-param-reassign */
 
 export const authActions = authSlice.actions;
 export const authReducer = authSlice.reducer;
-
-export function getUser() {
-    return async (dispatch) => {
-        try {
-            dispatch(authActions.setLoading(true));
-            const response = await api.getMyProfile();
-            dispatch(authActions.setUser(response.data));
-        } catch {
-            dispatch(showToastError("Error", "Error loading user profile"));
-        } finally {
-            dispatch(authActions.setLoading(false));
-        }
-    };
-}

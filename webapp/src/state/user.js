@@ -1,6 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { showToastError } from "../utils/toastHelper";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from "../api";
+
+export const loadAllUsers = createAsyncThunk("user/fetchAllUsers", async () => {
+    const response = await api.getUsers();
+    return response.data;
+});
 
 const initState = {
     allUsers: {
@@ -42,26 +46,17 @@ const userSlice = createSlice({
             state.isLoading = payload;
         },
     },
+    extraReducers: {
+        [loadAllUsers.fulfilled]: (state, action) => {
+            state.allUsers.allIds = [];
+            payload.forEach((usr) => {
+                state.allUsers.allIds.push(usr.id);
+                state.allUsers.byId[usr.id] = usr;
+            });
+        },
+    },
 });
 /* eslint-disable no-param-reassign */
 
 export const userActions = userSlice.actions;
 export const userReducer = userSlice.reducer;
-
-export function loadAllUsers() {
-    return async (dispatch) => {
-        try {
-            dispatch(
-                userActions.setLoading({ field: "allUsers", isLoading: true })
-            );
-            const response = await api.getUsers();
-            dispatch(userActions.setAllUsers(response.data));
-        } catch {
-            dispatch(showToastError("Error", "Error loading user profile"));
-        } finally {
-            dispatch(
-                userActions.setLoading({ field: "allUsers", isLoading: true })
-            );
-        }
-    };
-}
