@@ -1,17 +1,17 @@
-import { toastr, actions } from 'react-redux-toastr';
+import { actions } from "react-redux-toastr";
 
-export function showToastSuccess(title, message){
+export function showToastSuccess(title, message) {
     return actions.add({
         title,
         message,
-        type: 'success'
-    })
+        type: "success",
+    });
 }
 
-export function showToastError(title, message){
+export function showToastError(title, message) {
     return actions.add({
         title,
         message,
-        type: 'error'
-    })
+        type: "error",
+    });
 }

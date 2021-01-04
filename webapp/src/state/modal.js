@@ -1,25 +1,26 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initState = {
-    modalTypes: [],
-    modalProps:{}
-}
+    modalTypes: ["TEST"],
+    modalProps: {},
+};
 
+/* eslint-disable no-param-reassign */
+// since immer enables direct state mutations
 const modalSlice = createSlice({
     name: "modal",
     initialState: initState,
     reducers: {
-        showModal(state, { action, payload }){
-            state.modalTypes.push(payload.modalType)
-            state.modalProps[payload.modalType] = payload.modalProps
+        showModal(state, { payload }) {
+            state.modalTypes.push(payload.modalType);
+            state.modalProps[payload.modalType] = payload.modalProps;
         },
-        hideModal(state, { action, payload }){
-            const removedModalType = state.modalTypes.pop()
+        hideModal(state) {
+            state.modalTypes.pop();
         },
-    }
+    },
 });
-
-
+/* eslint-disable no-param-reassign */
 
 export const modalActions = modalSlice.actions;
 export const modalReducer = modalSlice.reducer;

@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-// these are wrapper components. need to forward the props via spreading 
+// these are wrapper components. need to forward the props via spreading
 
 import React, { useState } from "react";
 import {
@@ -12,7 +12,6 @@ import {
 } from "formik";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
 
 export function Form({
     initialValues,
@@ -37,13 +36,12 @@ export function Form({
     );
 }
 
-
 export function SubmitButton({ className, title }) {
     const { isSubmitting } = useFormikContext();
     return (
-        <button 
-            type="submit" 
-            className={className || "btn btn-primary"} 
+        <button
+            type="submit"
+            className={className || "btn btn-primary"}
             disabled={isSubmitting}
         >
             {title}
@@ -51,14 +49,18 @@ export function SubmitButton({ className, title }) {
     );
 }
 
-
 export function DisplayField({ fieldName, children }) {
     const context = useFormikContext();
     return children(context[fieldName]);
 }
 
-
-export function TextField({ name, label, type = "text", placeholder, ...rest }) {
+export function TextField({
+    name,
+    label,
+    type = "text",
+    placeholder,
+    ...rest
+}) {
     const [field, meta] = useField({ name, label, type, placeholder, ...rest });
     return (
         <>
@@ -70,16 +72,17 @@ export function TextField({ name, label, type = "text", placeholder, ...rest }) 
                 {...rest}
             />
             {meta.touched && meta.error ? (
-                <div className="invalid-feedback" style={{display:"block"}}>{meta.error}</div>
+                <div className="invalid-feedback" style={{ display: "block" }}>
+                    {meta.error}
+                </div>
             ) : null}
         </>
     );
 }
 
-
 export function Select(props) {
     const { name, label, options } = props;
-    const [field, meta,] = useField(props);
+    const [field, meta] = useField(props);
     return (
         <>
             {label && <label htmlFor={name}>{label}</label>}
@@ -92,16 +95,20 @@ export function Select(props) {
             >
                 <option value="">Choose...</option>
                 {options.map((optn) => (
-                    <option value={optn.value} label={optn.label || optn.value} />
+                    <option
+                        value={optn.value}
+                        label={optn.label || optn.value}
+                    />
                 ))}
             </select>
             {meta.touched && meta.error ? (
-                <div className="invalid-feedback" style={{display:"block"}}>{meta.error}</div>
+                <div className="invalid-feedback" style={{ display: "block" }}>
+                    {meta.error}
+                </div>
             ) : null}
         </>
     );
 }
-
 
 export function SearchableSelect(props) {
     const { name, label, options, ...rest } = props;
@@ -123,17 +130,18 @@ export function SearchableSelect(props) {
                 <option value="">Choose...</option>
                 {options.map((optn) => (
                     /* eslint-disable jsx-a11y/control-has-associated-label */
-                    <option value={optn.value} /> 
+                    <option value={optn.value} />
                     /* eslint-disable jsx-a11y/control-has-associated-label */
                 ))}
             </datalist>
             {meta.touched && meta.error ? (
-                <div className="invalid-feedback" style={{display:"block"}}>{meta.error}</div>
+                <div className="invalid-feedback" style={{ display: "block" }}>
+                    {meta.error}
+                </div>
             ) : null}
         </>
     );
 }
-
 
 export function Checkbox(props) {
     const { name, label } = props;
@@ -158,7 +166,6 @@ export function Checkbox(props) {
     );
 }
 
-
 export function DatePicker(props) {
     const { name, label, ...rest } = props;
     const { setFieldValue } = useFormikContext();
@@ -174,12 +181,13 @@ export function DatePicker(props) {
                 className="form-control"
             />
             {meta.touched && meta.error ? (
-                <div className="invalid-feedback" style={{display:"block"}}>{meta.error}</div>
+                <div className="invalid-feedback" style={{ display: "block" }}>
+                    {meta.error}
+                </div>
             ) : null}
         </>
     );
 }
-
 
 export function FileField(props) {
     const { name, label, ...rest } = props;
@@ -191,16 +199,19 @@ export function FileField(props) {
             <input
                 {...rest}
                 type="file"
-                onChange={(e) => setFieldValue(field.name, e.currentTarget.files[0])}
+                onChange={(e) =>
+                    setFieldValue(field.name, e.currentTarget.files[0])
+                }
                 className="form-control"
             />
             {meta.touched && meta.error ? (
-                <div className="invalid-feedback" style={{display:"block"}}>{meta.error}</div>
+                <div className="invalid-feedback" style={{ display: "block" }}>
+                    {meta.error}
+                </div>
             ) : null}
         </>
     );
 }
-
 
 export function TableField(props) {
     const { name, label, headers } = props;
@@ -216,10 +227,13 @@ export function TableField(props) {
     };
 
     const reset = () => {
-        const initValues = headers.reduce((preValue, currValue)=>({
-            ...preValue,
-            [currValue.value]: ""
-        }),{})
+        const initValues = headers.reduce(
+            (preValue, currValue) => ({
+                ...preValue,
+                [currValue.value]: "",
+            }),
+            {}
+        );
         setvalues(initValues);
     };
 
@@ -259,7 +273,7 @@ export function TableField(props) {
 
     return (
         <>
-            <label htmlFor={`table${name}`} >{label}</label>
+            <label htmlFor={`table${name}`}>{label}</label>
             <table id={`table${name}`} className="table table-borderless">
                 <thead>
                     <tr>
@@ -325,7 +339,6 @@ export function TableField(props) {
     );
 }
 
-
 export function YesNoRadio(props) {
     const { name, label } = props;
 
@@ -345,7 +358,10 @@ export function YesNoRadio(props) {
                                 id={`${name}-yes`}
                                 type="radio"
                             />
-                            <label className="custom-control-label" htmlFor={`${name}-yes`}>
+                            <label
+                                className="custom-control-label"
+                                htmlFor={`${name}-yes`}
+                            >
                                 Yes{" "}
                             </label>
                         </div>
@@ -359,14 +375,19 @@ export function YesNoRadio(props) {
                                 id={`${name}-no`}
                                 type="radio"
                             />
-                            <label className="custom-control-label" htmlFor={`${name}-no`}>
+                            <label
+                                className="custom-control-label"
+                                htmlFor={`${name}-no`}
+                            >
                                 No{" "}
                             </label>
                         </div>
                     </div>
                     <ErrorMessage
                         name={name}
-                        render={(msg) => <div style={{ color: "red" }}>{msg}</div>}
+                        render={(msg) => (
+                            <div style={{ color: "red" }}>{msg}</div>
+                        )}
                     />
                 </div>
             )}

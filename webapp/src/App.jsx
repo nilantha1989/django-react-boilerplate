@@ -1,23 +1,20 @@
- /* eslint-disable react/jsx-filename-extension */
- 
-import React, { useEffect } from 'react';
+ import React, { useEffect } from 'react';
 import {
 	BrowserRouter as Router,
 	Switch,
 	Link,
 	useLocation
 } from "react-router-dom";
-
+import ReduxToastr from 'react-redux-toastr';
+import { Provider, useDispatch } from 'react-redux';
 import './App.scss';
 import './custom.scss'
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
-import { Provider, useDispatch } from 'react-redux';
 import store from './state/store';
 import DashboardPage from './pages/DashboardPage';
 import {UserListPage, UserEditPage} from './pages/UserPages'
 import {PublicRoute, PrivateRoute} from './CustomRoutes';
 import SignInPage, {RegisterPage, LogoutPage} from './pages/AuthPage';
-import ReduxToastr from 'react-redux-toastr';
 import {loadAllUsers} from './state/user';
 import ModalContainer from './components/ModalContainer'
 
@@ -29,14 +26,14 @@ function Layout() {
 	
 	useEffect(()=>{
         dispatch(loadAllUsers())
-	},[])
+	},[dispatch])
 	
 	return (
 		<div>
 			<nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-				<a className="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Admin Boilerplate</a>
-				<ul class="navbar-nav px-3">
-					<li class="nav-item text-nowrap">
+				<Link to='/' className="navbar-brand col-sm-3 col-md-2 mr-0">Admin Boilerplate</Link>
+				<ul className="navbar-nav px-3">
+					<li className="nav-item text-nowrap">
 						<Link className="nav-link" to="/signout">
 							Sign Out
 						</Link>
@@ -82,12 +79,12 @@ function App() {
 				timeOut={2000}
 				transitionIn='fadeIn'
 				transitionOut='fadeOut'
-				closeOnToastrClick={true}
+				closeOnToastrClick
 			/>
 			<Router>
 				<div className="App">
 					<Switch>
-						<PublicRoute restricted={true} component={SignInPage} path="/signin" exact />
+						<PublicRoute restricted component={SignInPage} path="/signin" exact />
 						<PrivateRoute component={LogoutPage} path="/signout" exact />
 						<PrivateRoute component={RegisterPage} path="/register" exact />
 						<PrivateRoute component={Layout} path="/" />
@@ -115,16 +112,16 @@ function Breadcrumbs() {
 
     return (
 		<nav aria-label="breadcrumb" className="mb-5">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><Link to={'/'} >Home</Link></li>
+			<ol className="breadcrumb">
+				<li className="breadcrumb-item"><Link to='/' >Home</Link></li>
 				{pathnames.map((value, index) => {
 					const last = index === pathnames.length - 1;
 					const to = `/${pathnames.slice(0, index + 1).join('/')}`;
 					return last ? (
-						<li key={to} class="breadcrumb-item active" aria-current="page">{breadcrumbNameMap[to]}</li>
+						<li key={to} className="breadcrumb-item active" aria-current="page">{breadcrumbNameMap[to]}</li>
 					) : (
 							
-						<li key={to} class="breadcrumb-item"><Link to={to} >{breadcrumbNameMap[to]}</Link></li>
+						<li key={to} className="breadcrumb-item"><Link to={to} >{breadcrumbNameMap[to]}</Link></li>
 					);
 				})}
 			</ol>
