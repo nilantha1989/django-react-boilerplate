@@ -1,3 +1,5 @@
+ /* eslint-disable react/jsx-filename-extension */
+ 
 import React, { useEffect } from 'react';
 import {
 	BrowserRouter as Router,
@@ -27,8 +29,8 @@ function Layout() {
 	
 	useEffect(()=>{
         dispatch(loadAllUsers())
-    },[])
-
+	},[])
+	
 	return (
 		<div>
 			<nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
