@@ -8,7 +8,7 @@ const apiHandler = axios.create({
 
 apiHandler.interceptors.request.use((config) => {
     const newConf = config;
-    const token = localStorage.getItem(ACCESS_TOKEN_NAME);
+    const token = sessionStorage.getItem(ACCESS_TOKEN_NAME);
     newConf.headers.Authorization = `Bearer ${token}`;
     return newConf;
 });

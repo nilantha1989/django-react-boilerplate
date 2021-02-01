@@ -5,7 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { modalActions } from "../state/modal";
 
 function TestContent() {
-    return <div>Test Modal</div>;
+    return (
+        <div style={{width:500, height:300, padding:20}}>
+            <h4>Test Modal</h4>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, 
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+        </div>
+    )
 }
 
 const MODAL_CONTENT = {

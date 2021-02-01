@@ -145,7 +145,7 @@ export function SearchableSelect(props) {
 
 export function Checkbox(props) {
     const { name, label } = props;
-    const [field, helpers] = useField(props);
+    const [field, meta, helpers] = useField(props);
     return (
         <div className="custom-control custom-checkbox mr-3 mb-2">
             <input
@@ -215,7 +215,7 @@ export function FileField(props) {
 
 export function TableField(props) {
     const { name, label, headers } = props;
-    const [field, helpers] = useField(props);
+    const [field, meta, helpers] = useField(props);
     const [values, setvalues] = useState({});
 
     const handleInput = (e, fieldName) => {

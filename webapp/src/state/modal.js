@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initState = {
-    modalTypes: ["TEST"],
+    modalTypes: [],
     modalProps: {},
 };
 
