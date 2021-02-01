@@ -68,6 +68,7 @@ export function TextField({
             <input
                 className="form-control"
                 placeholder={placeholder || ""}
+                type={type}
                 {...field}
                 {...rest}
             />
