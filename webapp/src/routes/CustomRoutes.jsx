@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { useLoginStatus } from './hooks/auth'
+import { useLoginStatus } from '../hooks/auth'
 
 
 export const PrivateRoute = ({component: Component, ...rest}) => {

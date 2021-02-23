@@ -68,25 +68,23 @@ export default function SignInPage() {
                     validationSchema={LoginFormSchema}
                     onSubmit={onSubmit}
                 >
-                    <div className="input-row">
+                    <div className="input-row mt-4">
                         <TextField
-                            label="Email"
                             name="email"
                             id="email"
                             placeholder="Email"
                         />
                     </div>
-                    <div className="input-row">
+                    <div className="input-row mt-4">
                         <TextField
                             type="password"
                             id="password"
-                            label="Password"
                             name="password"
                             placeholder="Password"
                         />
                     </div>
 
-                    <div className="input-row">
+                    <div className="input-row mt-3">
                         <Checkbox name="remember" label="Remember me" />
                     </div>
 
@@ -108,7 +106,7 @@ export default function SignInPage() {
                         }}
                     </DisplayField>
                     <SubmitButton
-                        className="btn btn-primary mt-5 w-100"
+                        className="btn btn-primary mt-4 w-100"
                         title="Sign In"
                     />
                 </Form>
