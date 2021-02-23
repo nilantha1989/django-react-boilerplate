@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { loadAllUsers } from "../state/user";
 
-import {LayoutRoutes} from "../routes";
+import LayoutRoutes from "../routes/LayoutRoutes";
 
 const Layout = () => {
 	const location = useLocation();

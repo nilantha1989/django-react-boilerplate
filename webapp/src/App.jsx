@@ -5,7 +5,7 @@ import './App.scss';
 import './custom.scss'
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
 import store from './state/store';
-import {AppRoutes} from "./routes";
+import AppRoutes from "./routes/AppRoutes";
 
 
 function App() {
