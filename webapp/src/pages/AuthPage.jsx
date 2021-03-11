@@ -3,6 +3,9 @@ import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { useHistory, Link } from "react-router-dom";
 import { signIn } from "../api";
+
+import {appAPI} from "../services/appService";
+
 import { ACCESS_TOKEN_NAME, REFRESH_TOKEN_NAME } from "../config";
 import {
     Form,
