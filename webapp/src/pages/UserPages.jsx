@@ -4,6 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import PaginatedTable from "../components/PaginatedTable";
 import { userActions } from "../state/user";
+import { useGetUsersQuery, useGetUserQuery } from "../services/userService";
 
 import {
     Form,
@@ -17,8 +18,10 @@ import { showToastSuccess } from "../utils/toastHelper";
 export function UserListPage() {
     const history = useHistory();
     const dispatch = useDispatch();
-    const userIds = useSelector((state) => state.user.allUsers.allIds);
-    const userDetails = useSelector((state) => state.user.allUsers.byId);
+    const {
+        data: userDetails = { byId: {}, allIds: [] },
+        error: userError,
+    } = useGetUsersQuery();
 
     const onEditClick = (userId) => {
         history.push(`/users/editUser/${userId}`);
@@ -84,8 +87,8 @@ export function UserListPage() {
                     displayEditButton,
                 ]}
                 columnNames={["User Id", "Name", "Occupation", "Is Admin", ""]}
-                rows={userIds}
-                data={userDetails}
+                rows={userDetails.allIds}
+                data={userDetails.byId}
             />
         </div>
     );
@@ -103,7 +106,7 @@ export function UserEditPage() {
     const history = useHistory();
     const dispatch = useDispatch();
     const [isCreateMode, setIdCreateMode] = useState(false);
-    const user = useSelector((state) => state.user.allUsers.byId[userId]);
+    const {data:user={}} = useGetUserQuery({userId})
     const { subscription } = useSelector((state) => state.user);
     const [formData, setFormData] = useState({
         display_name: "",
