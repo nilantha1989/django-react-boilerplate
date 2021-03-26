@@ -5,8 +5,8 @@ import { userReducer } from "./user";
 import { modalReducer } from "./modal";
 
 // rtk-query demo
-import appAPI from "../services/appService";
-import userAPI from "../services/userService";
+import appService from "../services/appService";
+import userService from "../services/userService";
 
 export default configureStore({
     reducer: combineReducers({
@@ -14,7 +14,7 @@ export default configureStore({
         auth: authReducer,
         user: userReducer,
         modal: modalReducer,
-        [appAPI.reducerPath] : appAPI.reducer,
-        [userAPI.reducerPath] : userAPI.reducer
+        [appService.reducerPath] : appService.reducer,
+        [userService.reducerPath] : userService.reducer
     }),
 });

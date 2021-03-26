@@ -11,9 +11,8 @@ const baseQuery = fetchBaseQuery({
     }
 });
 
-const baseQueryWithAuth = (args, api) => {
+const baseQueryWithAutoLogout = (args, api) => {
     const result = baseQuery(args,api);
-
     if(result.error && result.error.status !== '401'){
         // redirection to signout
     }else{
@@ -21,11 +20,10 @@ const baseQueryWithAuth = (args, api) => {
     }
 }
 
-const appAPI = createApi({
-    reducerPath: "appApi",
-    baseQuery: baseQueryWithAuth,
+const appService = createApi({
+    reducerPath: "appService",
+    baseQuery: baseQueryWithAutoLogout,
     endpoints: (builder) => ({
-        
         signIn: builder.mutation({
             query: ({username, password})=>({
                 url: '/login',
@@ -51,4 +49,4 @@ const appAPI = createApi({
     })
 });
 
-export default appAPI;
+export default appService;
